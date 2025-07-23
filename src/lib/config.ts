@@ -7,9 +7,13 @@ export const config = createConfig({
   chains: [baseSepolia],
   connectors: [
     porto({
-      mode: Mode.dialog({
-        renderer: Dialog.popup(),
-      }),
+      mode: ["preview", "production"].includes(
+        process.env.NEXT_PUBLIC_VERCEL_ENV!,
+      )
+        ? undefined
+        : Mode.dialog({
+            renderer: Dialog.popup(),
+          }),
     }),
   ],
   transports: {
