@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
+import { Geist } from "next/font/google";
 import { PropsWithChildren } from "react";
 import { Providers } from "@/lib/providers";
 import "./globals.css";
+
+const geist = Geist({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Porto",
@@ -11,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
+    <html lang="en" className={geist.className}>
       <body>
         <Providers>{children}</Providers>
       </body>
