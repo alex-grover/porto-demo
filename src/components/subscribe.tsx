@@ -8,7 +8,6 @@ import { Hooks } from "porto/wagmi";
 import { FormEvent, useCallback, useState } from "react";
 import { toast } from "sonner";
 import { BaseError, UserRejectedRequestError } from "viem";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { exp1Config } from "@/lib/contracts";
 
 const tiers = [
@@ -189,13 +188,7 @@ export function Subscribe() {
         <div className="h-5 w-full max-w-[138px] rounded-full bg-gray-100" />
       </div>
 
-      <RadioGroup
-        className="flex w-full flex-1 select-none gap-2"
-        name="tier"
-        value={selectedTier}
-        // @ts-ignore
-        onValueChange={(value) => setSelectedTier(value)}
-      >
+      <div className="flex w-full flex-1 gap-2">
         {tiers.map((tier, index) => (
           <label
             className="inset-ring flex h-32 p-3.5 flex-1 rounded-xl ring-inset ring-1 ring-gray-600 [&:has(input:checked)]:ring-2 [&:has(input:checked)]:ring-blue-400"
@@ -203,7 +196,11 @@ export function Subscribe() {
           >
             <div className="flex h-full flex-col justify-between font-medium">
               <div className="text-gray-400 has-[input:checked]:text-blue-500">
-                <RadioGroupItem className="sr-only peer" value={tier.unit} />
+                <input
+                  type="radio"
+                  className="sr-only"
+                  checked={selectedTier === tier.unit}
+                />
                 <div className="text-sm leading-none">
                   Tier {"I".repeat(index + 1)}
                 </div>
@@ -219,7 +216,7 @@ export function Subscribe() {
             </div>
           </label>
         ))}
-      </RadioGroup>
+      </div>
 
       <button
         type="submit"
