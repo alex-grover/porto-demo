@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAccount } from "wagmi";
 import { SignInButton } from "./sign-in-button";
-import { Tip } from "./tip";
+import { Subscribe } from "./subscribe";
 
 export function Demo() {
   const account = useAccount();
@@ -15,5 +15,5 @@ export function Demo() {
 
   if (!account.address) return <SignInButton>Sign in to try</SignInButton>;
 
-  return <Tip />;
+  return <Subscribe />;
 }
