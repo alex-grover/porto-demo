@@ -11,9 +11,18 @@ export function Demo() {
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => setIsMounted(true), []);
 
-  if (!isMounted) return null;
+  if (!isMounted) return <div className="h-72" />;
 
-  if (!account.address) return <SignInButton>Sign in to try</SignInButton>;
+  if (!account.address)
+    return (
+      <div className="h-72 pt-4">
+        <SignInButton>Sign in to try</SignInButton>
+      </div>
+    );
 
-  return <Subscribe />;
+  return (
+    <div className="h-72">
+      <Subscribe />
+    </div>
+  );
 }

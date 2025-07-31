@@ -31,10 +31,9 @@ export function format(num: bigint | number | undefined, units = 18) {
 export function Subscribe() {
   const {
     data: permissions,
+    isPending,
     refetch: refetchPermissions,
-    ...other
   } = Hooks.usePermissions();
-  console.log({ permissions, ...other });
   const grantPermissions = Hooks.useGrantPermissions();
   const revokePermissions = Hooks.useRevokePermissions({
     mutation: {
@@ -68,8 +67,11 @@ export function Subscribe() {
   const permission = permissions?.find((permission) =>
     id
       ? permission.id === id
-      : permission.permissions.spend?.some(
-          (spend) => spend.token === subscriptionAddress,
+      : permission.permissions.calls.some(
+          (call) => call.to === subscriptionAddress,
+        ) &&
+        permission.permissions.spend?.some(
+          (spend) => spend.token === exp1Config.address,
         ),
   );
   const activeTier = permission?.permissions?.spend?.at(-1);
@@ -136,6 +138,8 @@ export function Subscribe() {
     },
     [selectedTier],
   );
+
+  if (isPending) return null;
 
   if (permission && activeTier && activeTierIndex !== -1)
     return (

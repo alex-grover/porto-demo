@@ -4,7 +4,7 @@ import { Demo } from "@/components/demo";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="flex justify-end p-4">
+      <header className="flex items-start justify-end p-4 h-20">
         <Connect />
       </header>
       <main className="grow flex flex-col items-center justify-center gap-2">
